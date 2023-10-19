@@ -1,4 +1,4 @@
-package edu.stanford.protege.github;
+package edu.stanford.protege.github.server;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;

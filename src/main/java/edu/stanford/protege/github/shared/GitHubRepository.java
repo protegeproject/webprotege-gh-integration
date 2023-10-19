@@ -1,7 +1,8 @@
-package edu.stanford.protege.github;
+package edu.stanford.protege.github.shared;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import edu.stanford.protege.github.server.GitHubRepositoryCoordinates;
 
 import java.util.Objects;
 

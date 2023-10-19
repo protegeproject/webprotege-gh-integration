@@ -1,5 +1,6 @@
-package edu.stanford.protege.github;
+package edu.stanford.protege.github.server;
 
+import edu.stanford.protege.github.server.GitHubRepositoryCoordinates;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

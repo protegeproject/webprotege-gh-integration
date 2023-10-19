@@ -1,4 +1,4 @@
-package edu.stanford.protege.github;
+package edu.stanford.protege.github.shared;
 
 import javax.annotation.Nonnull;
 

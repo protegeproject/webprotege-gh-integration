@@ -1,5 +1,6 @@
-package edu.stanford.protege.github;
+package edu.stanford.protege.github.server;
 
+import edu.stanford.protege.github.server.LinkGitHubRepositoryResponse;
 import edu.stanford.protege.webprotege.common.ProjectId;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

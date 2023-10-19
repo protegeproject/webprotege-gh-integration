@@ -1,4 +1,4 @@
-package edu.stanford.protege.github;
+package edu.stanford.protege.github.server;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -12,11 +12,11 @@ import javax.annotation.Nonnull;
  * Stanford Center for Biomedical Informatics Research
  * 2023-10-17
  */
-@JsonTypeName("LinkGitHubRepositoryRequest")
-public record LinkGitHubRepositoryRequest(@JsonProperty("projectId") @Nonnull ProjectId projectId,
-                                          @JsonProperty("repositoryCoordinates") GitHubRepositoryCoordinates repo) implements ProjectRequest<LinkGitHubRepositoryResponse> {
+@JsonTypeName("GetLinkedGitHubRepositoryRequest")
+public record GetLinkedGitHubRepositoryRequest(@JsonProperty("projectId") @Nonnull ProjectId projectId) implements ProjectRequest<GetLinkedGitHubRepositoryResponse> {
 
-    public static final String CHANNEL = "webprotege.github.LinkGitHubRepository";
+
+    public static final String CHANNEL = "webprotege.github.GetLinkedGitHubRepository";
 
     @Override
     public String getChannel() {

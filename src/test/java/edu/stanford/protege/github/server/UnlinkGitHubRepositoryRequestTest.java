@@ -1,5 +1,6 @@
-package edu.stanford.protege.github;
+package edu.stanford.protege.github.server;
 
+import edu.stanford.protege.github.server.UnlinkGitHubRepositoryRequest;
 import edu.stanford.protege.webprotege.common.ProjectId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
