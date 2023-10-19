@@ -61,6 +61,15 @@
 
   <build>
     <plugins>
+          <plugin>
+            <groupId>net.ltgt.gwt.maven</groupId>
+            <artifactId>gwt-maven-plugin</artifactId>
+            <version>1.0.1</version>
+            <extensions>true</extensions>
+            <configuration>
+              <moduleName>edu.stanford.protege.github</moduleName>
+            </configuration>
+          </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
