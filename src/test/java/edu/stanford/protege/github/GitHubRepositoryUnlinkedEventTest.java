@@ -1,4 +1,4 @@
-package edu.stanford.protege.ghintegration;
+package edu.stanford.protege.github;
 
 import edu.stanford.protege.webprotege.common.EventId;
 import edu.stanford.protege.webprotege.common.ProjectId;
@@ -13,13 +13,17 @@ import java.io.IOException;
 import java.io.StringReader;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Matthew Horridge
+ * Stanford Center for Biomedical Informatics Research
+ * 2023-10-18
+ */
 @JsonTest
 @AutoConfigureJson
-class GitHubRepositoryLinkedEventTest {
+class GitHubRepositoryUnlinkedEventTest {
 
-    private GitHubRepositoryLinkedEvent event;
+    private GitHubRepositoryUnlinkedEvent event;
 
     private EventId eventId;
 
@@ -28,19 +32,19 @@ class GitHubRepositoryLinkedEventTest {
     private GitHubRepositoryCoordinates repositoryCoordinates;
 
     @Autowired
-    private JacksonTester<GitHubRepositoryLinkedEvent> tester;
+    private JacksonTester<GitHubRepositoryUnlinkedEvent> tester;
 
     @BeforeEach
     void setUp() {
         eventId = EventId.generate();
         projectId = ProjectId.generate();
         repositoryCoordinates = GitHubRepositoryCoordinates.of("ACME", "R1");
-        event = new GitHubRepositoryLinkedEvent(eventId, projectId, repositoryCoordinates);
+        event = new GitHubRepositoryUnlinkedEvent(eventId, projectId, repositoryCoordinates);
     }
 
     @Test
     void shouldGetChannel() {
-        assertThat(event.getChannel()).isEqualTo("webprotege.events.github.GitHubRepositoryLinked");
+        assertThat(event.getChannel()).isEqualTo("webprotege.events.github.GitHubRepositoryUnlinked");
     }
 
     @Test
@@ -71,7 +75,7 @@ class GitHubRepositoryLinkedEventTest {
     void shouldDeserializeJson() throws IOException {
         var json = """
                  {
-                    "@type" : "webprotege.events.github.GitHubRepositoryLinked",
+                    "@type" : "webprotege.events.github.GitHubRepositoryUnlinked",
                     "eventId" : "11111111-2222-3333-4444-555555555555",
                     "projectId" : "11111111-1111-1111-1111-111111111111",
                     "repositoryCoordinates" : {

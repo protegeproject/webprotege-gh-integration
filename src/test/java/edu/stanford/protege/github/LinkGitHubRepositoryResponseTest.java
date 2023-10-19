@@ -1,4 +1,4 @@
-package edu.stanford.protege.ghintegration;
+package edu.stanford.protege.github;
 
 import edu.stanford.protege.webprotege.common.ProjectId;
 import org.junit.jupiter.api.Test;
@@ -11,25 +11,21 @@ import java.io.IOException;
 import java.io.StringReader;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Matthew Horridge
- * Stanford Center for Biomedical Informatics Research
- * 2023-10-18
- */
 @JsonTest
 @AutoConfigureJson
-public class GetLinkedGitHubRepositoryResponseTest {
+public class LinkGitHubRepositoryResponseTest {
 
     protected static final String PROJECT_ID = "11111111-2222-3333-4444-555555555555";
 
     @Autowired
-    private JacksonTester<GetLinkedGitHubRepositoryResponse> tester;
+    private JacksonTester<LinkGitHubRepositoryResponse> tester;
 
     @Test
     void shouldSerializeJson() throws IOException {
-        var content = tester.write(new GetLinkedGitHubRepositoryResponse(ProjectId.valueOf(PROJECT_ID),
-                                                           GitHubRepositoryCoordinates.of("ACME", "R1")));
+        var content = tester.write(new LinkGitHubRepositoryResponse(ProjectId.valueOf(PROJECT_ID),
+                                                                         GitHubRepositoryCoordinates.of("ACME", "R1")));
         assertThat(content).hasJsonPathStringValue("projectId", PROJECT_ID);
         assertThat(content).hasJsonPathStringValue("repositoryCoordinates.ownerName", "ACME");
         assertThat(content).hasJsonPathStringValue("repositoryCoordinates.repositoryName", "R1");
@@ -50,19 +46,19 @@ public class GetLinkedGitHubRepositoryResponseTest {
         assertThat(response.projectId().value()).isEqualTo(PROJECT_ID);
         assertThat(response.repositoryCoordinates().ownerName()).isEqualTo("ACME");
         assertThat(response.repositoryCoordinates().repositoryName()).isEqualTo("R1");
-
     }
 
     @Test
-    void shouldDeserializeJsonWithoutRepo() throws IOException {
-        var json = """
-                    {
-                        "projectId" : "11111111-2222-3333-4444-555555555555"
-                    }
-                """;
-        var response = tester.readObject(new StringReader(json));
-        assertThat(response.projectId().value()).isEqualTo(PROJECT_ID);
-        assertThat(response.repositoryCoordinates()).isNull();
-        assertThat(response.getRepositoryCoordinates()).isEmpty();
+    void shouldThrowNpeIfProjectIdIsNull() {
+        assertThrows(NullPointerException.class, () -> {
+           new LinkGitHubRepositoryResponse(null, GitHubRepositoryCoordinates.of("ACME", "R1"));
+        });
+    }
+
+    @Test
+    void shouldThrowNpeIfRepositoryCoordinatesIsNull() {
+        assertThrows(NullPointerException.class, () -> {
+           new LinkGitHubRepositoryResponse(ProjectId.generate(), null);
+        });
     }
 }

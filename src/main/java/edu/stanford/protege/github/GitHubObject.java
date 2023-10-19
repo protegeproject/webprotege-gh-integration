@@ -1,6 +1,4 @@
-package edu.stanford.protege.ghintegration;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
+package edu.stanford.protege.github;
 
 import javax.annotation.Nonnull;
 

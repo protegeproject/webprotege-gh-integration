@@ -1,4 +1,4 @@
-package edu.stanford.protege.ghintegration;
+package edu.stanford.protege.github;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

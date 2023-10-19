@@ -1,4 +1,4 @@
-package edu.stanford.protege.ghintegration;
+package edu.stanford.protege.github;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

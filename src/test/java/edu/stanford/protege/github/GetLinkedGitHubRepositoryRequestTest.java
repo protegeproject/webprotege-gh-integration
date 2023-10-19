@@ -1,4 +1,4 @@
-package edu.stanford.protege.ghintegration;
+package edu.stanford.protege.github;
 
 import edu.stanford.protege.webprotege.common.ProjectId;
 import org.junit.jupiter.api.BeforeEach;

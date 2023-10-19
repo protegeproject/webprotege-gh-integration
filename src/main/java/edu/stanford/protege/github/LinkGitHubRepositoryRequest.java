@@ -1,4 +1,4 @@
-package edu.stanford.protege.ghintegration;
+package edu.stanford.protege.github;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -6,8 +6,6 @@ import edu.stanford.protege.webprotege.common.ProjectId;
 import edu.stanford.protege.webprotege.common.ProjectRequest;
 
 import javax.annotation.Nonnull;
-
-import static edu.stanford.protege.ghintegration.LinkGitHubRepositoryRequest.CHANNEL;
 
 /**
  * Matthew Horridge
