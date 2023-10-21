@@ -1,6 +1,5 @@
 package edu.stanford.protege.github.server;
 
-import edu.stanford.protege.github.server.UnlinkGitHubRepositoryRequest;
 import edu.stanford.protege.webprotege.common.ProjectId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,28 +20,28 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @JsonTest
 @AutoConfigureJson
-public class UnlinkGitHubRepositoryRequestTest {
+public class ClearLinkedGitHubRepositoryRequestTest {
 
     protected static final String ORGANIZATION_NAME = "protegeproject";
 
     protected static final String REPO_NAME = "testrepo";
 
     @Autowired
-    private JacksonTester<UnlinkGitHubRepositoryRequest> tester;
+    private JacksonTester<ClearLinkedGitHubRepositoryRequest> tester;
 
-    private UnlinkGitHubRepositoryRequest request;
+    private ClearLinkedGitHubRepositoryRequest request;
 
     private ProjectId projectId;
 
     @BeforeEach
     void setUp() {
         projectId = ProjectId.generate();
-        request = new UnlinkGitHubRepositoryRequest(projectId);
+        request = new ClearLinkedGitHubRepositoryRequest(projectId);
     }
 
     @Test
     void shouldHaveExpectedChannel() {
-        assertThat(request.getChannel()).isEqualTo("webprotege.github.UnlinkGitHubRepository");
+        assertThat(request.getChannel()).isEqualTo("webprotege.github.ClearLinkedGitHubRepository");
     }
 
     @Test

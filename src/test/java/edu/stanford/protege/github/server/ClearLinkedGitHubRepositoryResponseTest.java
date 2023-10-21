@@ -1,6 +1,5 @@
 package edu.stanford.protege.github.server;
 
-import edu.stanford.protege.github.server.UnlinkGitHubRepositoryResponse;
 import edu.stanford.protege.webprotege.common.ProjectId;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,16 +15,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @JsonTest
 @AutoConfigureJson
-public class UnlinkGitHubRepositoryResponseTest {
+public class ClearLinkedGitHubRepositoryResponseTest {
 
     protected static final String PROJECT_ID = "11111111-2222-3333-4444-555555555555";
 
     @Autowired
-    private JacksonTester<UnlinkGitHubRepositoryResponse> tester;
+    private JacksonTester<ClearLinkedGitHubRepositoryResponse> tester;
 
     @Test
     void shouldSerializeJson() throws IOException {
-        var content = tester.write(new UnlinkGitHubRepositoryResponse(ProjectId.valueOf(PROJECT_ID)));
+        var content = tester.write(new ClearLinkedGitHubRepositoryResponse(ProjectId.valueOf(PROJECT_ID)));
         assertThat(content).hasJsonPathStringValue("projectId", PROJECT_ID);
     }
 
@@ -43,7 +42,7 @@ public class UnlinkGitHubRepositoryResponseTest {
     @Test
     void shouldThrowNpeIfProjectIdIsNull() {
         assertThrows(NullPointerException.class, () -> {
-            new UnlinkGitHubRepositoryResponse(null);
+            new ClearLinkedGitHubRepositoryResponse(null);
         });
     }
 }

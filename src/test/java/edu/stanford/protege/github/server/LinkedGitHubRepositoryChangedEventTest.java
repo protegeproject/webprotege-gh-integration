@@ -1,6 +1,5 @@
 package edu.stanford.protege.github.server;
 
-import edu.stanford.protege.github.server.GitHubRepositoryUnlinkedEvent;
 import edu.stanford.protege.webprotege.common.EventId;
 import edu.stanford.protege.webprotege.common.ProjectId;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,16 +14,11 @@ import java.io.StringReader;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-/**
- * Matthew Horridge
- * Stanford Center for Biomedical Informatics Research
- * 2023-10-18
- */
 @JsonTest
 @AutoConfigureJson
-class GitHubRepositoryUnlinkedEventTest {
+class LinkedGitHubRepositoryChangedEventTest {
 
-    private GitHubRepositoryUnlinkedEvent event;
+    private LinkedGitHubRepositoryChangedEvent event;
 
     private EventId eventId;
 
@@ -33,19 +27,19 @@ class GitHubRepositoryUnlinkedEventTest {
     private GitHubRepositoryCoordinates repositoryCoordinates;
 
     @Autowired
-    private JacksonTester<GitHubRepositoryUnlinkedEvent> tester;
+    private JacksonTester<LinkedGitHubRepositoryChangedEvent> tester;
 
     @BeforeEach
     void setUp() {
         eventId = EventId.generate();
         projectId = ProjectId.generate();
         repositoryCoordinates = GitHubRepositoryCoordinates.of("ACME", "R1");
-        event = new GitHubRepositoryUnlinkedEvent(eventId, projectId, repositoryCoordinates);
+        event = new LinkedGitHubRepositoryChangedEvent(eventId, projectId, repositoryCoordinates);
     }
 
     @Test
     void shouldGetChannel() {
-        assertThat(event.getChannel()).isEqualTo("webprotege.events.github.GitHubRepositoryUnlinked");
+        assertThat(event.getChannel()).isEqualTo("webprotege.events.github.GitHubRepositoryLinked");
     }
 
     @Test
@@ -76,7 +70,7 @@ class GitHubRepositoryUnlinkedEventTest {
     void shouldDeserializeJson() throws IOException {
         var json = """
                  {
-                    "@type" : "webprotege.events.github.GitHubRepositoryUnlinked",
+                    "@type" : "webprotege.events.github.GitHubRepositoryLinked",
                     "eventId" : "11111111-2222-3333-4444-555555555555",
                     "projectId" : "11111111-1111-1111-1111-111111111111",
                     "repositoryCoordinates" : {

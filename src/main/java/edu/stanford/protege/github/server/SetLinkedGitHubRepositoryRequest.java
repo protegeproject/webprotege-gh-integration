@@ -12,11 +12,11 @@ import javax.annotation.Nonnull;
  * Stanford Center for Biomedical Informatics Research
  * 2023-10-17
  */
-@JsonTypeName("LinkGitHubRepositoryRequest")
-public record LinkGitHubRepositoryRequest(@JsonProperty("projectId") @Nonnull ProjectId projectId,
-                                          @JsonProperty("repositoryCoordinates") GitHubRepositoryCoordinates repo) implements ProjectRequest<LinkGitHubRepositoryResponse> {
+@JsonTypeName("SetLinkedGitHubRepositoryRequest")
+public record SetLinkedGitHubRepositoryRequest(@JsonProperty("projectId") @Nonnull ProjectId projectId,
+                                               @JsonProperty("repositoryCoordinates") GitHubRepositoryCoordinates repositoryCoordinates) implements ProjectRequest<SetLinkedGitHubRepositoryResponse> {
 
-    public static final String CHANNEL = "webprotege.github.LinkGitHubRepository";
+    public static final String CHANNEL = "webprotege.github.SetLinkedGitHubRepository";
 
     @Override
     public String getChannel() {

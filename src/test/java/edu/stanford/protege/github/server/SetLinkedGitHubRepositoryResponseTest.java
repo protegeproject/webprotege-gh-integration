@@ -1,6 +1,5 @@
 package edu.stanford.protege.github.server;
 
-import edu.stanford.protege.github.server.LinkGitHubRepositoryResponse;
 import edu.stanford.protege.webprotege.common.ProjectId;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,16 +15,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @JsonTest
 @AutoConfigureJson
-public class LinkGitHubRepositoryResponseTest {
+public class SetLinkedGitHubRepositoryResponseTest {
 
     protected static final String PROJECT_ID = "11111111-2222-3333-4444-555555555555";
 
     @Autowired
-    private JacksonTester<LinkGitHubRepositoryResponse> tester;
+    private JacksonTester<SetLinkedGitHubRepositoryResponse> tester;
 
     @Test
     void shouldSerializeJson() throws IOException {
-        var content = tester.write(new LinkGitHubRepositoryResponse(ProjectId.valueOf(PROJECT_ID),
+        var content = tester.write(new SetLinkedGitHubRepositoryResponse(ProjectId.valueOf(PROJECT_ID),
                                                                          GitHubRepositoryCoordinates.of("ACME", "R1")));
         assertThat(content).hasJsonPathStringValue("projectId", PROJECT_ID);
         assertThat(content).hasJsonPathStringValue("repositoryCoordinates.ownerName", "ACME");
@@ -52,14 +51,14 @@ public class LinkGitHubRepositoryResponseTest {
     @Test
     void shouldThrowNpeIfProjectIdIsNull() {
         assertThrows(NullPointerException.class, () -> {
-           new LinkGitHubRepositoryResponse(null, GitHubRepositoryCoordinates.of("ACME", "R1"));
+           new SetLinkedGitHubRepositoryResponse(null, GitHubRepositoryCoordinates.of("ACME", "R1"));
         });
     }
 
     @Test
     void shouldThrowNpeIfRepositoryCoordinatesIsNull() {
         assertThrows(NullPointerException.class, () -> {
-           new LinkGitHubRepositoryResponse(ProjectId.generate(), null);
+           new SetLinkedGitHubRepositoryResponse(ProjectId.generate(), null);
         });
     }
 }

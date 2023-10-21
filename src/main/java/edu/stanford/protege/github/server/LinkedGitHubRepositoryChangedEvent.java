@@ -7,8 +7,9 @@ import edu.stanford.protege.webprotege.common.ProjectEvent;
 import edu.stanford.protege.webprotege.common.ProjectId;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-import static edu.stanford.protege.github.server.GitHubRepositoryLinkedEvent.CHANNEL;
+import static edu.stanford.protege.github.server.LinkedGitHubRepositoryChangedEvent.CHANNEL;
 
 /**
  * Matthew Horridge
@@ -16,9 +17,9 @@ import static edu.stanford.protege.github.server.GitHubRepositoryLinkedEvent.CHA
  * 2023-10-17
  */
 @JsonTypeName(CHANNEL)
-public record GitHubRepositoryLinkedEvent(@JsonProperty("eventId") @Nonnull EventId eventId,
-                                          @JsonProperty("projectId") @Nonnull ProjectId projectId,
-                                          @JsonProperty("repositoryCoordinates") @Nonnull GitHubRepositoryCoordinates repositoryCoordinates) implements ProjectEvent {
+public record LinkedGitHubRepositoryChangedEvent(@JsonProperty("eventId") @Nonnull EventId eventId,
+                                                 @JsonProperty("projectId") @Nonnull ProjectId projectId,
+                                                 @JsonProperty("repositoryCoordinates") @Nullable GitHubRepositoryCoordinates repositoryCoordinates) implements ProjectEvent {
 
     public static final String CHANNEL = "webprotege.events.github.GitHubRepositoryLinked";
 

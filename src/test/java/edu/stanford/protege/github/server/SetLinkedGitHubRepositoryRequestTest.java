@@ -1,6 +1,5 @@
 package edu.stanford.protege.github.server;
 
-import edu.stanford.protege.github.server.LinkGitHubRepositoryRequest;
 import edu.stanford.protege.webprotege.common.ProjectId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,16 +20,16 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @JsonTest
 @AutoConfigureJson
-public class LinkGitHubRepositoryRequestTest {
+public class SetLinkedGitHubRepositoryRequestTest {
 
     protected static final String ORGANIZATION_NAME = "protegeproject";
 
     protected static final String REPO_NAME = "testrepo";
 
     @Autowired
-    private JacksonTester<LinkGitHubRepositoryRequest> tester;
+    private JacksonTester<SetLinkedGitHubRepositoryRequest> tester;
 
-    private LinkGitHubRepositoryRequest request;
+    private SetLinkedGitHubRepositoryRequest request;
 
     private ProjectId projectId;
 
@@ -40,12 +39,12 @@ public class LinkGitHubRepositoryRequestTest {
     void setUp() {
         projectId = ProjectId.generate();
         repo = GitHubRepositoryCoordinates.of(ORGANIZATION_NAME, REPO_NAME);
-        request = new LinkGitHubRepositoryRequest(projectId, repo);
+        request = new SetLinkedGitHubRepositoryRequest(projectId, repo);
     }
 
     @Test
     void shouldHaveExpectedChannel() {
-        assertThat(request.getChannel()).isEqualTo("webprotege.github.LinkGitHubRepository");
+        assertThat(request.getChannel()).isEqualTo("webprotege.github.SetLinkedGitHubRepository");
     }
 
     @Test
@@ -68,7 +67,7 @@ public class LinkGitHubRepositoryRequestTest {
                """;
         var read = tester.readObject(new StringReader(json));
         assertThat(read.projectId().value()).isEqualTo("11111111-2222-3333-4444-555555555555");
-        assertThat(read.repo().ownerName()).isEqualTo("protegeproject");
-        assertThat(read.repo().repositoryName()).isEqualTo("testrepo");
+        assertThat(read.repositoryCoordinates().ownerName()).isEqualTo("protegeproject");
+        assertThat(read.repositoryCoordinates().repositoryName()).isEqualTo("testrepo");
     }
 }

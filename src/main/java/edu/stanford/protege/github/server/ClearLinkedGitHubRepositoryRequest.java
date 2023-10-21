@@ -7,10 +7,10 @@ import edu.stanford.protege.webprotege.common.ProjectRequest;
 
 import javax.annotation.Nonnull;
 
-@JsonTypeName("UnlinkGitHubRepositoryRequest")
-public record UnlinkGitHubRepositoryRequest(@JsonProperty("projectId") @Nonnull ProjectId projectId) implements ProjectRequest<LinkGitHubRepositoryResponse> {
+@JsonTypeName("ClearLinkedGitHubRepositoryRequest")
+public record ClearLinkedGitHubRepositoryRequest(@JsonProperty("projectId") @Nonnull ProjectId projectId) implements ProjectRequest<ClearLinkedGitHubRepositoryResponse> {
 
-    public static final String CHANNEL = "webprotege.github.UnlinkGitHubRepository";
+    public static final String CHANNEL = "webprotege.github.ClearLinkedGitHubRepository";
 
     @Override
     public String getChannel() {
