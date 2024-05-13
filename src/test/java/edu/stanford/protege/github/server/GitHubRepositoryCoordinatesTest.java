@@ -1,8 +1,13 @@
 package edu.stanford.protege.github.server;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.stanford.protege.github.server.GitHubRepositoryCoordinates;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.json.JacksonTester;
+
+import java.io.IOException;
+import java.io.StringReader;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,8 +20,11 @@ class GitHubRepositoryCoordinatesTest {
 
     private GitHubRepositoryCoordinates coords;
 
+    private JacksonTester<GitHubRepositoryCoordinates> jacksonTester;
+
     @BeforeEach
     void setUp() {
+        JacksonTester.initFields(this, new ObjectMapper());
         coords = GitHubRepositoryCoordinates.of(TEST_OWNER_NAME, TEST_REPO_NAME);
     }
 
@@ -61,5 +69,26 @@ class GitHubRepositoryCoordinatesTest {
         assertThrows(NullPointerException.class, () -> {
             GitHubRepositoryCoordinates.of(TEST_OWNER_NAME, null);
         });
+    }
+
+    @Test
+    void shouldSerializeRepositoryCoordinates() throws IOException {
+        var json = jacksonTester.write(coords);
+        assertThat(json).hasJsonPathStringValue("ownerName", TEST_OWNER_NAME);
+        assertThat(json).hasJsonPathStringValue("repositoryName", TEST_REPO_NAME);
+    }
+
+    @Test
+    void shouldDeserializeRepositoryCoodinates() throws IOException {
+        var json = """
+                {
+                    "ownerName" : "TestOwnerName",
+                    "repositoryName" : "TestRepoName"
+                }
+                """;
+        var read = jacksonTester.read(new StringReader(json));
+        var readCoords = read.getObject();
+        assertThat(readCoords.ownerName()).isEqualTo(TEST_OWNER_NAME);
+        assertThat(readCoords.repositoryName()).isEqualTo(TEST_REPO_NAME);
     }
 }
