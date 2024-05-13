@@ -8,11 +8,18 @@ import edu.stanford.protege.webprotege.common.Response;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Objects;
 import java.util.Optional;
 
 @JsonTypeName("GetLinkedGitHubRepositoryResponse")
 public record GetLinkedGitHubRepositoryResponse(@JsonProperty("projectId") @Nonnull ProjectId projectId,
                                                 @JsonProperty("repositoryCoordinates") @Nullable GitHubRepositoryCoordinates repositoryCoordinates) implements Response {
+
+    public GetLinkedGitHubRepositoryResponse(@JsonProperty("projectId") @Nonnull ProjectId projectId,
+                                             @JsonProperty("repositoryCoordinates") @Nullable GitHubRepositoryCoordinates repositoryCoordinates) {
+        this.projectId = Objects.requireNonNull(projectId);
+        this.repositoryCoordinates = repositoryCoordinates;
+    }
 
     @JsonIgnore
     public Optional<GitHubRepositoryCoordinates> getRepositoryCoordinates() {

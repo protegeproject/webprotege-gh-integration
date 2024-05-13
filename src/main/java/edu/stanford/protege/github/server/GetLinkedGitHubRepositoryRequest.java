@@ -6,6 +6,7 @@ import edu.stanford.protege.webprotege.common.ProjectId;
 import edu.stanford.protege.webprotege.common.ProjectRequest;
 
 import javax.annotation.Nonnull;
+import java.util.Objects;
 
 /**
  * Matthew Horridge
@@ -17,6 +18,10 @@ public record GetLinkedGitHubRepositoryRequest(@JsonProperty("projectId") @Nonnu
 
 
     public static final String CHANNEL = "webprotege.github.GetLinkedGitHubRepository";
+
+    public GetLinkedGitHubRepositoryRequest(@JsonProperty("projectId") @Nonnull ProjectId projectId) {
+        this.projectId = Objects.requireNonNull(projectId);
+    }
 
     @Override
     public String getChannel() {

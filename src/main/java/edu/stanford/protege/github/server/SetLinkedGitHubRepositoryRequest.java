@@ -6,6 +6,7 @@ import edu.stanford.protege.webprotege.common.ProjectId;
 import edu.stanford.protege.webprotege.common.ProjectRequest;
 
 import javax.annotation.Nonnull;
+import java.util.Objects;
 
 /**
  * Matthew Horridge
@@ -14,9 +15,15 @@ import javax.annotation.Nonnull;
  */
 @JsonTypeName("SetLinkedGitHubRepositoryRequest")
 public record SetLinkedGitHubRepositoryRequest(@JsonProperty("projectId") @Nonnull ProjectId projectId,
-                                               @JsonProperty("repositoryCoordinates") GitHubRepositoryCoordinates repositoryCoordinates) implements ProjectRequest<SetLinkedGitHubRepositoryResponse> {
+                                               @JsonProperty("repositoryCoordinates") @Nonnull GitHubRepositoryCoordinates repositoryCoordinates) implements ProjectRequest<SetLinkedGitHubRepositoryResponse> {
 
     public static final String CHANNEL = "webprotege.github.SetLinkedGitHubRepository";
+
+    public SetLinkedGitHubRepositoryRequest(@JsonProperty("projectId") @Nonnull ProjectId projectId,
+                                            @JsonProperty("repositoryCoordinates") @Nonnull GitHubRepositoryCoordinates repositoryCoordinates) {
+        this.projectId = Objects.requireNonNull(projectId);
+        this.repositoryCoordinates = Objects.requireNonNull(repositoryCoordinates);
+    }
 
     @Override
     public String getChannel() {

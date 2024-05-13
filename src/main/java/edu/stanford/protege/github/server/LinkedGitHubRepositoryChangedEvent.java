@@ -9,6 +9,8 @@ import edu.stanford.protege.webprotege.common.ProjectId;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import java.util.Objects;
+
 import static edu.stanford.protege.github.server.LinkedGitHubRepositoryChangedEvent.CHANNEL;
 
 /**
@@ -22,6 +24,14 @@ public record LinkedGitHubRepositoryChangedEvent(@JsonProperty("eventId") @Nonnu
                                                  @JsonProperty("repositoryCoordinates") @Nullable GitHubRepositoryCoordinates repositoryCoordinates) implements ProjectEvent {
 
     public static final String CHANNEL = "webprotege.events.github.GitHubRepositoryLinked";
+
+    public LinkedGitHubRepositoryChangedEvent(@JsonProperty("eventId") @Nonnull EventId eventId,
+                                              @JsonProperty("projectId") @Nonnull ProjectId projectId,
+                                              @JsonProperty("repositoryCoordinates") @Nullable GitHubRepositoryCoordinates repositoryCoordinates) {
+        this.eventId = Objects.requireNonNull(eventId);
+        this.projectId = Objects.requireNonNull(projectId);
+        this.repositoryCoordinates = repositoryCoordinates;
+    }
 
     @Override
     public String getChannel() {
