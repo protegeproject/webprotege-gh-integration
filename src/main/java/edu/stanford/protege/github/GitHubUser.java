@@ -7,6 +7,7 @@ import com.google.auto.value.AutoValue;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 import javax.annotation.Nullable;
+import java.util.Objects;
 
 /**
  * Matthew Horridge
@@ -83,13 +84,13 @@ public abstract class GitHubUser implements IsSerializable {
                                  @JsonProperty("html_url") @Nullable String htmlUrl,
                                  @JsonProperty("type") @Nullable GitHubUserType type,
                                  @JsonProperty("site_admin") boolean siteAdmin) {
-        return new AutoValue_GitHubUser(Helper.requireNonNullElse(login, ""),
+        return new AutoValue_GitHubUser(Objects.requireNonNullElse(login, ""),
                                         id,
-                                        Helper.requireNonNullElse(nodeId, ""),
-                                        Helper.requireNonNullElse(avatarUrl, ""),
-                                        Helper.requireNonNullElse(url, ""),
-                                        Helper.requireNonNullElse(htmlUrl, ""),
-                                        Helper.requireNonNullElse(type, GitHubUserType.USER),
+                                        Objects.requireNonNullElse(nodeId, ""),
+                                        Objects.requireNonNullElse(avatarUrl, ""),
+                                        Objects.requireNonNullElse(url, ""),
+                                        Objects.requireNonNullElse(htmlUrl, ""),
+                                        Objects.requireNonNullElse(type, GitHubUserType.USER),
                                         siteAdmin);
     }
 

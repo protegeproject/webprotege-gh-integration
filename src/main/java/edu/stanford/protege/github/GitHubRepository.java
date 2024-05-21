@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.auto.value.AutoValue;
 
+import java.util.Objects;
+
 /**
  * A summary representation of a GitHub repository
  */
@@ -19,10 +21,10 @@ public abstract class GitHubRepository implements GitHubObject {
                             @JsonProperty("full_name") String fullName,
                             @JsonProperty("description") String description) {
         return new AutoValue_GitHubRepository(id,
-                                              Helper.requireNonNullElse(nodeId, ""),
-                                              Helper.requireNonNullElse(name, ""),
-                                              Helper.requireNonNullElse(fullName, ""),
-                                              Helper.requireNonNullElse(description, ""));
+                                              Objects.requireNonNullElse(nodeId, ""),
+                                              Objects.requireNonNullElse(name, ""),
+                                              Objects.requireNonNullElse(fullName, ""),
+                                              Objects.requireNonNullElse(description, ""));
     }
 
     @JsonIgnore
