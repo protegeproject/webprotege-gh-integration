@@ -3,12 +3,12 @@ package edu.stanford.protege.github;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.auto.value.AutoValue;
 import com.google.gwt.regexp.shared.MatchResult;
 import com.google.gwt.regexp.shared.RegExp;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 /**
  * Matthew Horridge
@@ -17,29 +17,34 @@ import java.util.Objects;
  * <p>
  * Constructs a new GitHubRepositoryCoordinates object with the specified owner and repository names.
  */
-@AutoValue
-@GwtCompatible(serializable = true)
-public abstract class GitHubRepositoryCoordinates {
+public record GitHubRepositoryCoordinates(@JsonProperty("ownerName") @Nonnull String ownerName,
+                                          @JsonProperty("repositoryName") @Nonnull String repositoryName) {
 
-    public static final RegExp NAME_PATTERN = RegExp.compile("[A-Za-z0-9_.-]+");
+    public static final Pattern NAME_PATTERN = Pattern.compile("[A-Za-z0-9_.-]+");
 
-    public static final RegExp FULL_NAME_PATTERN = RegExp.compile("^(" + NAME_PATTERN.getSource() + ")/(" + NAME_PATTERN.getSource() + ")$");
+    public static final Pattern FULL_NAME_PATTERN = Pattern.compile("^(" + NAME_PATTERN.pattern() + ")/(" + NAME_PATTERN.pattern() + ")$");
 
+    public GitHubRepositoryCoordinates {
+        Objects.requireNonNull(ownerName);
+        Objects.requireNonNull(repositoryName);
+    }
 
     @JsonCreator
     @Nonnull
-    public static GitHubRepositoryCoordinates of(@JsonProperty("ownerName") @Nonnull String organizationName,
-                                                 @JsonProperty("repositoryName") @Nonnull String repoName) {
-        return new AutoValue_GitHubRepositoryCoordinates(organizationName, repoName);
+    public static GitHubRepositoryCoordinates of(@JsonProperty("ownerName") @Nonnull String ownerName,
+                                                 @JsonProperty("repositoryName") @Nonnull String repositoryName) {
+        Objects.requireNonNull(ownerName);
+        Objects.requireNonNull(repositoryName);
+        return new GitHubRepositoryCoordinates(ownerName, repositoryName);
     }
 
     public static GitHubRepositoryCoordinates fromFullName(@Nonnull String fullName) {
         Objects.requireNonNull(fullName);
-        MatchResult fullNameMatcher = FULL_NAME_PATTERN.exec(fullName);
-        if (fullNameMatcher == null) {
+        var fullNameMatcher = FULL_NAME_PATTERN.matcher(fullName);
+        if (!fullNameMatcher.matches()) {
             throw new IllegalArgumentException("Invalid full name");
         }
-        return GitHubRepositoryCoordinates.of(fullNameMatcher.getGroup(1), fullNameMatcher.getGroup(2));
+        return GitHubRepositoryCoordinates.of(fullNameMatcher.group(1), fullNameMatcher.group(2));
     }
 
     /**
@@ -51,12 +56,4 @@ public abstract class GitHubRepositoryCoordinates {
     public String getFullName() {
         return ownerName() + "/" + repositoryName();
     }
-
-    @JsonProperty("ownerName")
-    @Nonnull
-    public abstract String ownerName();
-
-    @JsonProperty("repositoryName")
-    @Nonnull
-    public abstract String repositoryName();
 }
