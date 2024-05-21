@@ -5,7 +5,6 @@ package edu.stanford.protege.github;
  * Stanford Center for Biomedical Informatics Research
  * 2023-10-19
  */
-import com.google.gwt.user.client.rpc.IsSerializable;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.AutoConfigureJson;

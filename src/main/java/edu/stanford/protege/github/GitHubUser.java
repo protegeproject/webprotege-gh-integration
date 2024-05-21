@@ -3,8 +3,6 @@ package edu.stanford.protege.github;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.auto.value.AutoValue;
-import com.google.gwt.user.client.rpc.IsSerializable;
 
 import javax.annotation.Nullable;
 import java.util.Objects;
@@ -22,7 +20,7 @@ public record GitHubUser(@JsonProperty("login") @Nullable String login,
                          @JsonProperty("url") @Nullable String url,
                          @JsonProperty("html_url") @Nullable String htmlUrl,
                          @JsonProperty("type") @Nullable GitHubUserType type,
-                         @JsonProperty("site_admin") boolean siteAdmin) implements IsSerializable {
+                         @JsonProperty("site_admin") boolean siteAdmin) {
 
     public GitHubUser(@JsonProperty("login") @Nullable String login,
                       @JsonProperty("id") long id,
