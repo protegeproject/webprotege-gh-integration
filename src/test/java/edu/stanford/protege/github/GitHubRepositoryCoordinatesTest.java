@@ -1,7 +1,7 @@
-package edu.stanford.protege.github.shared;
+package edu.stanford.protege.github;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.stanford.protege.github.shared.GitHubRepositoryCoordinates;
+import edu.stanford.protege.github.GitHubRepositoryCoordinates;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.json.JacksonTester;

@@ -1,6 +1,6 @@
-package edu.stanford.protege.github.server;
+package edu.stanford.protege.github;
 
-import edu.stanford.protege.github.server.GetLinkedGitHubRepositoryRequest;
+import edu.stanford.protege.github.GetLinkedGitHubRepositoryRequest;
 import edu.stanford.protege.webprotege.common.ProjectId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

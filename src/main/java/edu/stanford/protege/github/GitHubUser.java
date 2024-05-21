@@ -1,4 +1,4 @@
-package edu.stanford.protege.github.shared;
+package edu.stanford.protege.github;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -7,7 +7,6 @@ import com.google.auto.value.AutoValue;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 import javax.annotation.Nullable;
-import java.util.Objects;
 
 /**
  * Matthew Horridge
@@ -81,7 +80,7 @@ public abstract class GitHubUser implements IsSerializable {
                                  @JsonProperty("node_id") @Nullable String nodeId,
                                  @JsonProperty("avatar_url") @Nullable String avatarUrl,
                                  @JsonProperty("url") @Nullable String url,
-                                 @JsonProperty("htmlUrl") @Nullable String htmlUrl,
+                                 @JsonProperty("html_url") @Nullable String htmlUrl,
                                  @JsonProperty("type") @Nullable GitHubUserType type,
                                  @JsonProperty("site_admin") boolean siteAdmin) {
         return new AutoValue_GitHubUser(Helper.requireNonNullElse(login, ""),

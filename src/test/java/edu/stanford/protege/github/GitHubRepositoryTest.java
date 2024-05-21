@@ -1,8 +1,8 @@
-package edu.stanford.protege.github.shared;
+package edu.stanford.protege.github;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import edu.stanford.protege.github.shared.GitHubRepository;
+import edu.stanford.protege.github.GitHubRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

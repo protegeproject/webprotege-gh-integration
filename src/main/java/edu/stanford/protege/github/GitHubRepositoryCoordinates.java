@@ -1,4 +1,4 @@
-package edu.stanford.protege.github.shared;
+package edu.stanford.protege.github;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -9,7 +9,6 @@ import com.google.gwt.regexp.shared.RegExp;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;
-import java.util.regex.Pattern;
 
 /**
  * Matthew Horridge

@@ -1,4 +1,4 @@
-package edu.stanford.protege.github.server;
+package edu.stanford.protege.github;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -7,7 +7,7 @@ import edu.stanford.protege.webprotege.common.Response;
 
 import java.util.Objects;
 
-import static edu.stanford.protege.github.server.ClearLinkedGitHubRepositoryRequest.CHANNEL;
+import static edu.stanford.protege.github.ClearLinkedGitHubRepositoryRequest.CHANNEL;
 
 @JsonTypeName(CHANNEL)
 public record ClearLinkedGitHubRepositoryResponse(@JsonProperty("projectId")

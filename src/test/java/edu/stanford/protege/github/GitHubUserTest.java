@@ -1,4 +1,4 @@
-package edu.stanford.protege.github.shared;
+package edu.stanford.protege.github;
 
 /**
  * Matthew Horridge

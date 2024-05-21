@@ -1,5 +1,7 @@
-package edu.stanford.protege.github.server;
+package edu.stanford.protege.github;
 
+import edu.stanford.protege.github.SetLinkedGitHubRepositoryRequest;
+import edu.stanford.protege.github.GitHubRepositoryCoordinates;
 import edu.stanford.protege.webprotege.common.ProjectId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,47 +18,58 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Matthew Horridge
  * Stanford Center for Biomedical Informatics Research
- * 2023-10-18
+ * 2023-10-17
  */
 @JsonTest
 @AutoConfigureJson
-public class ClearLinkedGitHubRepositoryRequestTest {
+public class SetLinkedGitHubRepositoryRequestTest {
 
     protected static final String ORGANIZATION_NAME = "protegeproject";
 
     protected static final String REPO_NAME = "testrepo";
 
     @Autowired
-    private JacksonTester<ClearLinkedGitHubRepositoryRequest> tester;
+    private JacksonTester<SetLinkedGitHubRepositoryRequest> tester;
 
-    private ClearLinkedGitHubRepositoryRequest request;
+    private SetLinkedGitHubRepositoryRequest request;
 
     private ProjectId projectId;
+
+    private GitHubRepositoryCoordinates repo;
 
     @BeforeEach
     void setUp() {
         projectId = ProjectId.generate();
-        request = new ClearLinkedGitHubRepositoryRequest(projectId);
+        repo = GitHubRepositoryCoordinates.of(ORGANIZATION_NAME, REPO_NAME);
+        request = new SetLinkedGitHubRepositoryRequest(projectId, repo);
     }
 
     @Test
     void shouldHaveExpectedChannel() {
-        assertThat(request.getChannel()).isEqualTo("webprotege.github.ClearLinkedGitHubRepository");
+        assertThat(request.getChannel()).isEqualTo("webprotege.github.SetLinkedGitHubRepository");
     }
 
     @Test
     void shouldSerializeRequest() throws IOException {
         var content = tester.write(request);
         assertThat(content).hasJsonPathStringValue("projectId", projectId.value());
+        assertThat(content).hasJsonPathStringValue("repositoryCoordinates.ownerName", ORGANIZATION_NAME);
+        assertThat(content).hasJsonPathStringValue("repositoryCoordinates.repositoryName", REPO_NAME);
     }
 
     @Test
     void shouldDeserializeRequest() throws IOException {
         var json = """
-               { "projectId" : "11111111-2222-3333-4444-555555555555"
+               { "projectId" : "11111111-2222-3333-4444-555555555555",
+                 "repositoryCoordinates" : {
+                     "ownerName" : "protegeproject",
+                     "repositoryName" : "testrepo"
+                 }
                }
                """;
         var read = tester.readObject(new StringReader(json));
         assertThat(read.projectId().value()).isEqualTo("11111111-2222-3333-4444-555555555555");
+        assertThat(read.repositoryCoordinates().ownerName()).isEqualTo("protegeproject");
+        assertThat(read.repositoryCoordinates().repositoryName()).isEqualTo("testrepo");
     }
 }

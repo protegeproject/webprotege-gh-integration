@@ -1,4 +1,4 @@
-package edu.stanford.protege.github.shared;
+package edu.stanford.protege.github;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
