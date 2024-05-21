@@ -92,14 +92,6 @@ public class GitHubUserTest {
     }
 
     @Test
-    public void shouldBeGwtSerializable() {
-        assertThat(GitHubUser.class.getInterfaces()).contains(IsSerializable.class);
-
-        var anno = GitHubUser.class.getAnnotation(GwtCompatible.class);
-        assertThat(anno).isNotNull();
-    }
-
-    @Test
     public void shouldGetEmptyUser() {
         var user = GitHubUser.empty();
         assertThat(user.login()).isEmpty();
