@@ -8,12 +8,14 @@ import edu.stanford.protege.webprotege.common.ProjectRequest;
 import javax.annotation.Nonnull;
 import java.util.Objects;
 
+import static edu.stanford.protege.github.server.GetLinkedGitHubRepositoryRequest.CHANNEL;
+
 /**
  * Matthew Horridge
  * Stanford Center for Biomedical Informatics Research
  * 2023-10-17
  */
-@JsonTypeName("GetLinkedGitHubRepositoryRequest")
+@JsonTypeName(CHANNEL)
 public record GetLinkedGitHubRepositoryRequest(@JsonProperty("projectId") @Nonnull ProjectId projectId) implements ProjectRequest<GetLinkedGitHubRepositoryResponse> {
 
 

@@ -1,6 +1,7 @@
 package edu.stanford.protege.github.shared;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.auto.value.AutoValue;
 import com.google.gwt.user.client.rpc.IsSerializable;
@@ -15,6 +16,7 @@ import java.util.Objects;
  */
 @AutoValue
 @GwtCompatible(serializable = true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class GitHubUser implements IsSerializable {
 
     /**
@@ -82,13 +84,13 @@ public abstract class GitHubUser implements IsSerializable {
                                  @JsonProperty("htmlUrl") @Nullable String htmlUrl,
                                  @JsonProperty("type") @Nullable GitHubUserType type,
                                  @JsonProperty("site_admin") boolean siteAdmin) {
-        return new AutoValue_GitHubUser(Objects.requireNonNullElse(login, ""),
+        return new AutoValue_GitHubUser(Helper.requireNonNullElse(login, ""),
                                         id,
-                                        Objects.requireNonNullElse(nodeId, ""),
-                                        Objects.requireNonNullElse(avatarUrl, ""),
-                                        Objects.requireNonNullElse(url, ""),
-                                        Objects.requireNonNullElse(htmlUrl, ""),
-                                        Objects.requireNonNullElse(type, GitHubUserType.USER),
+                                        Helper.requireNonNullElse(nodeId, ""),
+                                        Helper.requireNonNullElse(avatarUrl, ""),
+                                        Helper.requireNonNullElse(url, ""),
+                                        Helper.requireNonNullElse(htmlUrl, ""),
+                                        Helper.requireNonNullElse(type, GitHubUserType.USER),
                                         siteAdmin);
     }
 

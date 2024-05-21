@@ -1,6 +1,6 @@
 package edu.stanford.protege.github.server;
 
-import edu.stanford.protege.github.server.GetLinkedGitHubRepositoryResponse;
+import edu.stanford.protege.github.shared.GitHubRepositoryCoordinates;
 import edu.stanford.protege.webprotege.common.ProjectId;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ public class GetLinkedGitHubRepositoryResponseTest {
     @Test
     void shouldSerializeJson() throws IOException {
         var content = tester.write(new GetLinkedGitHubRepositoryResponse(ProjectId.valueOf(PROJECT_ID),
-                                                           GitHubRepositoryCoordinates.of("ACME", "R1")));
+                                                                         GitHubRepositoryCoordinates.of("ACME", "R1")));
         assertThat(content).hasJsonPathStringValue("projectId", PROJECT_ID);
         assertThat(content).hasJsonPathStringValue("repositoryCoordinates.ownerName", "ACME");
         assertThat(content).hasJsonPathStringValue("repositoryCoordinates.repositoryName", "R1");

@@ -2,6 +2,7 @@ package edu.stanford.protege.github.server;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import edu.stanford.protege.github.shared.GitHubRepositoryCoordinates;
 import edu.stanford.protege.webprotege.common.ProjectId;
 import edu.stanford.protege.webprotege.common.Response;
 

@@ -8,7 +8,9 @@ import edu.stanford.protege.webprotege.common.ProjectRequest;
 import javax.annotation.Nonnull;
 import java.util.Objects;
 
-@JsonTypeName("ClearLinkedGitHubRepositoryRequest")
+import static edu.stanford.protege.github.server.ClearLinkedGitHubRepositoryRequest.CHANNEL;
+
+@JsonTypeName(CHANNEL)
 public record ClearLinkedGitHubRepositoryRequest(@JsonProperty("projectId") @Nonnull ProjectId projectId) implements ProjectRequest<ClearLinkedGitHubRepositoryResponse> {
 
     public static final String CHANNEL = "webprotege.github.ClearLinkedGitHubRepository";

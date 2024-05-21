@@ -34,7 +34,7 @@ class GitHubRepositoryTest {
 
     @BeforeEach
     void setUp() {
-        repository = new GitHubRepository(ID, NODE_ID, REPO_NAME, FULL_NAME, DESCRIPTION);
+        repository = GitHubRepository.get(ID, NODE_ID, REPO_NAME, FULL_NAME, DESCRIPTION);
     }
 
     @Test
@@ -97,7 +97,7 @@ class GitHubRepositoryTest {
 
     @Test
     void shouldConstructWithNullFields() {
-        var repo = new GitHubRepository(1L, null, null, null, null);
+        var repo = GitHubRepository.get(1L, null, null, null, null);
         assertThat(repo.id()).isEqualTo(ID);
         assertThat(repo.name()).isEqualTo("");
         assertThat(repo.fullName()).isEqualTo("");

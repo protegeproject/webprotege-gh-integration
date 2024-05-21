@@ -1,40 +1,50 @@
 package edu.stanford.protege.github.shared;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import edu.stanford.protege.github.server.GitHubRepositoryCoordinates;
-
-import java.util.Objects;
+import com.google.auto.value.AutoValue;
 
 /**
  * A summary representation of a GitHub repository
- * @param id The repository identifier
- * @param nodeId The unique GraphQL node identifier
- * @param name The name of the repository
- * @param fullName The full name of the repository.  This is the owner name followed by a slash followed by the
- *                 repository name.
- * @param description A human readable description of the repository
  */
-public record GitHubRepository(@JsonProperty("id") long id,
-                               @JsonProperty("node_id") String nodeId,
-                               @JsonProperty("name") String name,
-                               @JsonProperty("full_name") String fullName,
-                               @JsonProperty("description") String description) implements GitHubObject {
+@AutoValue
+@GwtCompatible(serializable = true)
+public abstract class GitHubRepository implements GitHubObject {
 
-    public GitHubRepository(@JsonProperty("id") long id,
+    @JsonCreator
+    public static GitHubRepository get(@JsonProperty("id") long id,
                             @JsonProperty("node_id") String nodeId,
                             @JsonProperty("name") String name,
                             @JsonProperty("full_name") String fullName,
                             @JsonProperty("description") String description) {
-        this.id = id;
-        this.nodeId = Objects.requireNonNullElse(nodeId, "");
-        this.name = Objects.requireNonNullElse(name, "");
-        this.fullName = Objects.requireNonNullElse(fullName, "");
-        this.description = Objects.requireNonNullElse(description, "");
+        return new AutoValue_GitHubRepository(id,
+                                              Helper.requireNonNullElse(nodeId, ""),
+                                              Helper.requireNonNullElse(name, ""),
+                                              Helper.requireNonNullElse(fullName, ""),
+                                              Helper.requireNonNullElse(description, ""));
     }
 
     @JsonIgnore
     public GitHubRepositoryCoordinates getCoordinates() {
-        return GitHubRepositoryCoordinates.fromFullName(fullName);
+        return GitHubRepositoryCoordinates.fromFullName(fullName());
     }
+
+    @Override
+    @JsonProperty("id")
+    public abstract long id();
+
+    @Override
+    @JsonProperty("node_id")
+    public abstract String nodeId();
+
+    @JsonProperty("name")
+    public abstract String name();
+
+    @JsonProperty("full_name")
+    public abstract String fullName();
+
+    @JsonProperty("description")
+    public abstract String description();
 }

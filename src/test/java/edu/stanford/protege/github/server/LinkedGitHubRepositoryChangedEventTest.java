@@ -1,5 +1,6 @@
 package edu.stanford.protege.github.server;
 
+import edu.stanford.protege.github.shared.GitHubRepositoryCoordinates;
 import edu.stanford.protege.webprotege.common.EventId;
 import edu.stanford.protege.webprotege.common.ProjectId;
 import org.junit.jupiter.api.BeforeEach;
